@@ -26,6 +26,6 @@ module.exports = function(app){
 }
 
   // If no matching route is found default to home
-  // app.use(function(request, response){
-	// 	response.sendFile(path.join(__dirname, '../public/index.html'));
-	// });
+    app.use(function(request, response){
+		response.sendFile(path.join(__dirname, '../public/index.html'));
+	});
