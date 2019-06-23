@@ -12,7 +12,7 @@ var path = require("path");
 
 // Sets an initial port. We"ll use this later in our listener
 var app = express();
-var port = process.env.PORT || 3000;
+var Port = process.env.Port || 3000;
 
 // express.json and express.urlEncoded make it easy for our server to interpret data sent to it.
 // The code below is pretty standard.
@@ -33,6 +33,6 @@ require("./app/routing/htmlRoutes.js")(app);
 // LISTENER
 // The below code effectively "starts" our server
 // ==============================================================================
-app.listen(port, function() {
-  console.log("App listening on PORT " + PORT);
+app.listen(Port, function() {
+  console.log("App listening on Port: " + Port);
 });

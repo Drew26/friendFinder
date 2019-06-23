@@ -1,5 +1,5 @@
 //friends.js
-var Clients = [
+var friends = [
     {
         name: 'Big Poppa',
         photo: 'https://i3.sndcdn.com/artworks-000152673454-b5pbol-t500x500.jpg',
@@ -62,4 +62,4 @@ var Clients = [
     }
 ];
 
-module.exports = Clients;
+module.exports = friends;

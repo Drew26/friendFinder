@@ -36,21 +36,21 @@ module.exports = function (app) {
   // In the case of multiple users with the same result it will choose the first match.
   // After the test, it will push the user to the database.
   app.post("/api/friends", function (request, response) {
-    var newClient = request.body;
+    var newFriend = request.body;
     //console.log(friends[0].score[0]);
 
-    //console.log(newClient);
+    //console.log(newFriend);
     // We will use this object to hold the "best match". We will constantly update it as we
     // loop through all of the options
 
-    for (var i = 0; i < newClient.scores.length; i++) {
-      if (newClient.scores[i] === "1 (Strongly Disagree)") {
-        newClient.scores[i] = 1;
-      } else if (newClient.scores[i] === "5 (Strongly Agree)") {
-        newClient.scores[i] = 5;
+    for (var i = 0; i < newFriend.scores.length; i++) {
+      if (newFriend.scores[i] === "1 (Strongly Disagree)") {
+        newFriend.scores[i] = 1;
+      } else if (newFriend.scores[i] === "5 (Strongly Agree)") {
+        newFriend.scores[i] = 5;
         // Here we take the result of the user"s survey POST and parse it.
       } else {
-        newClient.scores[i] = parseInt(newClient.scores[i]);
+        newFriend.scores[i] = parseInt(newFriend.scores[i]);
       }
     }
 
@@ -62,12 +62,12 @@ module.exports = function (app) {
 
     // Here we loop through all the friend possibilities in the database.
     for (var i = 0; i < friends.length; i++) {
-      var clientMatch = friends[i];
+      var friendMatch = friends[i];
       var Difference = 0;
       // We then loop through all the scores of each friend
-      for (var j = 0; j < clientMatch.scores.length; j++) {
-        var clientDifference = Math.abs(clientMatch.scores[j] - newClient.scores[j]);
-        Difference += clientDifference;
+      for (var j = 0; j < friendMatch.scores.length; j++) {
+        var friendDifference = Math.abs(friendMatch.scores[j] - newFriend.scores[j]);
+        Difference += friendDifference;
       }
       // We calculate the difference between the scores and sum them into the Difference
       diff.push(Difference);
@@ -82,7 +82,7 @@ module.exports = function (app) {
       }
     }
     // Reset the bestMatch to be the new friend.
-    friends.push(newClient);
+    friends.push(newFriend);
 
     // Finally save the user's data to the database (this has to happen AFTER the check. otherwise,
     // the database will always return that the user is the user's best friend).
